@@ -10,7 +10,13 @@
       xhr.open('get', this.API_URL, true);
       xhr.responseType = 'json';
       xhr.onload = function() {
-        console.log('YIPPIE MAN');
+        if(xhr.status == 200) {
+          var data = (!xhr.responseType)?JSON.parse(xhr.response):xhr.response;
+          console.log(data);
+          
+        } else {
+          console.log('ERROR MAN');
+        }
       }
       xhr.onerror = function() {
         console.log('ERROR MAN');
