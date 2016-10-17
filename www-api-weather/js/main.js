@@ -17,12 +17,22 @@
           var query = data.query;
           var results = query.results;
           var channel = results.channel;
+          var units = channel.units;
           var item = channel.item;
           var conditionNow = item.condition;
 
+          /*
+            "code": "28",
+            "date": "Mon, 17 Oct 2016 10:00 AM CEST",
+            "temp": "12",
+            "text": "Mostly Cloudy"
+          */
+
           var tempStr = '';
-          tempStr += '<div class="weather-widget">';
-          tempStr += 'YAHOE';
+          tempStr += '<div class="weather-widget" data-code="' + conditionNow.code + '">';
+          tempStr += '<div class="weather-widget__temp-now">' + conditionNow.temp + ' °' + units.temperature + '</div>';
+           tempStr += '<div class="weather-widget__condition-now">' + conditionNow.text + '</div>';
+          tempStr += '<time datetime="' + conditionNow.date + '">' + conditionNow.date + '</time>';
           tempStr += '</div>';
 
           that.parentContainer.innerHTML = tempStr;
