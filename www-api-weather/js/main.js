@@ -6,7 +6,16 @@
     this.parentContainer = parentContainer;
 
     this.loadData = function() {
-
+      var xhr = new XMLHttpRequest();
+      xhr.open('get', this.API_URL, true);
+      xhr.responseType = 'json';
+      xhr.onload = function() {
+        console.log('YIPPIE MAN');
+      }
+      xhr.onerror = function() {
+        console.log('ERROR MAN');
+      }
+      xhr.send();
     };
 
     this.updateUI = function() {
@@ -20,6 +29,7 @@
   };
 
   var ww1 = new WeatherWidget(1, document.querySelector('.sidebar'));
+  ww1.loadData();
   console.log(ww1.toString());
 
 })();
