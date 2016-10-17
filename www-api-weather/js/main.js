@@ -6,14 +6,26 @@
     this.parentContainer = parentContainer;
 
     this.loadData = function() {
+      var that = this;
+
       var xhr = new XMLHttpRequest();
       xhr.open('get', this.API_URL, true);
       xhr.responseType = 'json';
       xhr.onload = function() {
         if(xhr.status == 200) {
           var data = (!xhr.responseType)?JSON.parse(xhr.response):xhr.response;
-          console.log(data);
-          
+          var query = data.query;
+          var results = query.results;
+          var channel = results.channel;
+          var item = channel.item;
+          var conditionNow = item.condition;
+
+          var tempStr = '';
+          tempStr += '<div class="weather-widget">';
+          tempStr += 'YAHOE';
+          tempStr += '</div>';
+
+          that.parentContainer.innerHTML = tempStr;
         } else {
           console.log('ERROR MAN');
         }
