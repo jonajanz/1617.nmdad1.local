@@ -24,7 +24,7 @@
         // Get the loaded data
         var data = (!xhr.responseType)?JSON.parse(xhr.response):xhr.response;
         // Get the real results from iTunes
-        this.results = data.query.results.json.results;
+        that.results = data.query.results.json.results;
         // Call the updateUI() function
         that.updateUI();
       };
@@ -38,6 +38,7 @@
 
     this.updateUI = function() {
       console.log('UPDATE THE UI DUDE');
+      console.log(this.results);
     }
 
   };
