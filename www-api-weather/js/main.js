@@ -22,6 +22,13 @@
     };
 
     this.updateUI = function() {
+      var item = this.channel.item;
+      var condition = item.condition;
+      var forcast = item.forecast;
+      var location = this.channel.location;
+      var units = this.channel.units;
+      var wind = this.channel.wind;
+
       console.log(this.channel);
     };
 
@@ -31,7 +38,7 @@
 
   };
 
-  var ww1 = new WeatherWidget(1, document.querySelector('.sidebar'));
+  var ww1 = new WeatherWidget(1, document.querySelector('.page--weather-now'));
   ww1.loadData();
   console.log(ww1.toString());
 
