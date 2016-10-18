@@ -1,7 +1,9 @@
 ;(function() {
   
   function ITunesApp() {
-    this.API_URL = 'https://itunes.apple.com/search?term=daft+punk';
+    
+    // Use Yahoo as a reverse proxy solve CORS (Cross Origin Resource Sharing problems)
+    this.API_URL = 'https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20json%20where%20url%3D%22https%3A%2F%2Fitunes.apple.com%2Fsearch%3Fterm%3Ddaft%2Bpunk%22&format=json&diagnostics=true&callback=';
 
     // Load the data from the API (iTunes)
     this.loadData = function() {
