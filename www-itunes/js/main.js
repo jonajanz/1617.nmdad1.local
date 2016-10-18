@@ -8,6 +8,8 @@
 
     // Load the data from the API (iTunes)
     this.loadData = function() {
+      // Hack
+      var that = this;
       // Define a XMLHttpRequest object in order to load data
       var xhr = new XMLHttpRequest();
       // 1. Open a connection to the API
@@ -21,8 +23,10 @@
       xhr.onload = function() {
         // Get the loaded data
         var data = (!xhr.responseType)?JSON.parse(xhr.response):xhr.response;
+        // Get the real results from iTunes
         this.results = data.query.results.json.results;
-        console.log(this.results);
+        // Call the updateUI() function
+        that.updateUI();
       };
       // 3.2. onload: i received an error
       xhr.onerror = function() {
@@ -31,6 +35,10 @@
       // 4. Send the request
       xhr.send();
     };
+
+    this.updateUI = function() {
+      console.log('UPDATE THE UI DUDE');
+    }
 
   };
 
