@@ -1,9 +1,10 @@
 ;(function() {
   
   function ITunesApp() {
-    
+
     // Use Yahoo as a reverse proxy solve CORS (Cross Origin Resource Sharing problems)
     this.API_URL = 'https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20json%20where%20url%3D%22https%3A%2F%2Fitunes.apple.com%2Fsearch%3Fterm%3Ddaft%2Bpunk%22&format=json&diagnostics=true&callback=';
+    this.results;
 
     // Load the data from the API (iTunes)
     this.loadData = function() {
@@ -18,7 +19,10 @@
       // 3. Listeners
       // 3.1. onload: i received something that's not an error
       xhr.onload = function() {
-        console.log('Welcome to iTunes :)');
+        // Get the loaded data
+        var data = (!xhr.responseType)?JSON.parse(xhr.response):xhr.response;
+        this.results = data.query.results.json.results;
+        console.log(this.results);
       };
       // 3.2. onload: i received an error
       xhr.onerror = function() {
