@@ -2,15 +2,19 @@
   
   function ITunesApp() {
 
-    // Use Yahoo as a reverse proxy solve CORS (Cross Origin Resource Sharing problems)
-    this.API_URL_PREFIX = 'https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20json%20where%20url%3D%22https%3A%2F%2Fitunes.apple.com%2Fsearch%3Fterm%3D';
-    this.API_URL_SUFFIX = '%26entity%3Dalbum%22%20&format=json&diagnostics=true&callback=';
+    // URL of the Search API
+    this.API_URL_PREFIX = 'https://itunes.apple.com/search?term=';
+    this.API_URL_SUFFIX = '&entity=album&callback=json_callback';
+    // The results within the JSON-object
+    this.results;
+    // Interface elements
     this.txtSearchElement;
     this.btnSearchElement;
-    this.results;
 
     // Initialize App
     this.init = function() {
+      console.log('1. Initialize the app');
+
       // Hack
       var that = this;
 
@@ -26,46 +30,33 @@
 
     // Load the data from the API (iTunes)
     this.loadData = function(artist) {
-
-      artist = artist.replace(' ', '%2B');
-      console.log
-
-      // API_URL
-      var API_URL = this.API_URL_PREFIX + artist + this.API_URL_SUFFIX;
-
-      // Hack
+      // Hack --> Closure
       var that = this;
-      // Define a XMLHttpRequest object in order to load data
-      var xhr = new XMLHttpRequest();
-      // 1. Open a connection to the API
-      // get verb: Get the information from the end-point (READ execution)
-      // Third option means asynchronous action or not
-      xhr.open('get', API_URL, true);
-      // 2. Settings
-      xhr.responseType = 'json';
-      // 3. Listeners
-      // 3.1. onload: i received something that's not an error
-      xhr.onload = function() {
-        // Get the loaded data
-        var data = (!xhr.responseType)?JSON.parse(xhr.response):xhr.response;
-        // Get the real results from iTunes
-        that.results = data.query.results.json.results;
-        // Call the updateUI() function
-        that.updateUI();
-      };
-      // 3.2. onload: i received an error
-      xhr.onerror = function() {
-        console.log('Error');
-      };
-      // 4. Send the request
-      xhr.send();
+      console.log('2. Load the Data');
+
+      var API_URL = this.API_URL_PREFIX + artist.replace(' ', '%2B') + this.API_URL_SUFFIX;
+
+      Utils.getJSONPByPromise(API_URL).then(
+        function(data) {
+          that.results = data.results;
+          that.updateUI();
+        },
+        function(error) {
+          console.log(error);
+        }
+      );
+
     };
 
+    // Update the User Interface (UI)
     this.updateUI = function() {
-      this.generateTable();
-    }
+      console.log('3. Update UI');
+      this.generateCards();
+    };
 
-    this.generateTable = function() {
+    // Generate the albums as a table with rows
+    this.generateTableUI = function() {
+      console.log('4. Generate UI with table-element');
       var tempStr = '';
       tempStr += '<div class="mdl-cell mdl-cell--12-col itunes-results">';
       tempStr += '<table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">'
@@ -92,8 +83,9 @@
       tempStr += '</tbody>';
       tempStr += '</div>';
       document.querySelector('.itunes-results').innerHTML = tempStr;
-    }
+    };
 
+    // Generate the albums as a set of cards
     this.generateCards = function() {
       var tempStr = '';
       
@@ -118,6 +110,7 @@
 
   // Make an instance of the ITunesApp
   var app = new ITunesApp();
+  // Initialize the app
   app.init();
 
 })();
