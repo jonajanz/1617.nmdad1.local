@@ -15,6 +15,9 @@
 
         // Define a function which loads the data from the YouTube API
         this.loadData = function() {
+            // Hack --> Closures
+            var that = this;
+
             console.log('2. Load the data from the API');
             // Make an instance of the XMLHttpRequest object constructor in order to call the API
             var xhr = new XMLHttpRequest();
@@ -28,8 +31,11 @@
             // 2.3. Register the listeners
             // 2.3.1. onload: I received something that's not an error
             xhr.onload = function() {
+                // Get the loaded data and transform to a literal object
+                var data = (!xhr.responseType)?JSON.parse(xhr.response):xhr.response;
+                console.log(data.pageInfo.totalResults);
                 // Call the updateUI function
-                this.updateUI();
+                that.updateUI();
             };
             // 2.3.2. onerror: I received something that's an error
             xhr.onerror = function() {
