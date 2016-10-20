@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge,chrome=1">
 
-        <title>Reveal gdm.gent | Web and New Media | Artevelde University College Ghent</title>
+        <title>YouTube gdm.gent | Web and New Media | Artevelde University College Ghent</title>
         <meta name="description" content="gdm.gent frontend boilerplate for the mass. We want the share all or knowledge on webtechnologies with you all :)">
         <meta name="keywords" content="HTML5, CSS3, JavaScript, jQuery, Responsive, Grid">
         <meta name="author" content="gdm.gent | Bachelor of Graphic and Digital Media | Artevelde University College Ghent">
@@ -17,6 +17,9 @@
         <link rel="dns-prefetch" href="//fonts.googleapis.com">
 
         <!-- CSS-libraries -->
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.min.css">
 
         <!-- My Own StyleSheets:  main.js -->
 		<link rel="stylesheet" href="./css/main.css">
@@ -24,10 +27,29 @@
 	</head>
 	<body>
 
-        
+        <div class="mdl-layout mdl-js-layout">
+            <main class="mdl-layout__content">
+                <div class="mdl-grid">
+                <div class="mdl-cell mdl-cell--12-col">
+                    <form action="#">
+                    <div class="mdl-textfield mdl-js-textfield">
+                        <input class="mdl-textfield__input" type="text" id="txt-search">
+                        <label class="mdl-textfield__label" for="txt-search">Search ...</label>
+                    </div>
+                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored btn-search">Search</button>
+                    </form>
+                </div>
+                </div>
+                <div class="mdl-grid youtube-results">
+                </div>
+            </main>
+        </div>
+
+        <!-- External JS-libraries: None at this moment -->
+        <script src="https://code.getmdl.io/1.2.1/material.min.js"></script>
 
         <!-- My Own Scripts: Main Script -->
         <script src="js/main.js"></script>
 
 	</body>
-</html>
+</html>     

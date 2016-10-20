@@ -1,0 +1,33 @@
+.youtube-results .mdl-cell {
+  overflow-x: auto;
+}
+
+.youtube-results .mdl-data-table {
+    white-space: pre-wrap;
+}
+
+.mdl-card__media {
+    margin: 0;
+}
+
+.mdl-card__media > img {
+    width: 100%;
+}
+
+.collage {
+    position: relative;
+    width: 100%;
+}
+
+.collage__picture {
+    position: absolute;
+    display: block;
+    width: 20%;
+    max-height: 30%;
+    overflow: hidden;
+}
+
+.collage__picture > img {
+    width: 100%;
+    background-size: cover;
+}
