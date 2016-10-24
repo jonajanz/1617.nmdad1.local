@@ -1,0 +1,51 @@
+/*
+HACK in order to werk WayPoints in combination with Material Design Lite
+*/
+.mdl-layout {
+    height: auto;
+}
+
+/*
+Persons just for a deom
+*/
+.person {
+    position: relative;
+    height: 300px;
+    background: hsla(0,50%,50%,1);
+    transform: translateX(-300%);
+    transition: all 368ms ease-in-out 0s;
+}
+.mdl-grid .mdl-cell:nth-of-type(even) .person {
+    transform: translateX(300%);
+}
+.person--show {
+    transform: translateX(0%);
+    transition: all 368ms ease-in-out 0s;
+}
+.mdl-grid .mdl-cell:nth-of-type(even) .person--show {
+    transform: translateX(0%);
+}
+.person--1 {
+    background: hsla(0,50%,50%,1);
+}
+.person--2 {
+    background: hsla(45,50%,50%,1);
+}
+.person--3 {
+    background: hsla(90,50%,50%,1);
+}
+.person--4 {
+    background: hsla(135,50%,50%,1);
+}
+.person--5 {
+    background: hsla(180,50%,50%,1);
+}
+.person--6 {
+    background: hsla(225,50%,50%,1);
+}
+.person--7 {
+    background: hsla(270,50%,50%,1);
+}
+.person--8 {
+    background: hsla(315,50%,50%,1);
+}

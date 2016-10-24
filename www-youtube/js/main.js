@@ -115,14 +115,28 @@
 
             document.querySelector('.youtube-results').innerHTML = tempStr;
 
+            // Animate Collage Pictures
+            this.currentIndexCollagePictureAnimated = 0;
+            this.animateCollagePicturesUI();
+        }
+
+        this.currentIndexCollagePictureAnimated = 0;
+        this.animateCollagePicturesUI = function() {
             var collageElement = document.querySelectorAll('.youtube-results .collage');
             var collagePictureElements = document.querySelectorAll('.youtube-results .collage__picture');
-            for(var i=0;i<collagePictureElements.length;i++) {
-                var collagePicture = collagePictureElements[i];
+
+            if(this.currentIndexCollagePictureAnimated < collagePictureElements.length) {
+                var collagePicture = collagePictureElements[this.currentIndexCollagePictureAnimated];
                 var tx = Math.random()*collageElement[0].offsetWidth;
                 var ty = Math.random()*collageElement[0].offsetHeight;
-                var styleStr = `transform:translateX(${tx}px) translateY(${ty}px);`;
+                var deg = Math.random()*360;
+                var styleStr = `transform:translateX(${tx}px) translateY(${ty}px) rotate(${deg}deg); transition: all 238ms ease-in-out 0s;`;
                 collagePicture.setAttribute('style', styleStr);
+
+                var that = this;
+                window.setTimeout( function() { that.animateCollagePicturesUI(); }, 268);
+
+                this.currentIndexCollagePictureAnimated++;
             }
         }
 
