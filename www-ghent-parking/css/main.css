@@ -1,0 +1,11 @@
+.itunes-results {
+  overflow-x: auto;
+}
+
+.mdl-card__media {
+    margin: 0;
+}
+
+.mdl-card__media > img {
+    width: 100%;
+}
