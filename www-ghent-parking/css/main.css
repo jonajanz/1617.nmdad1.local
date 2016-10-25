@@ -1,11 +1,15 @@
-.itunes-results {
-  overflow-x: auto;
+.mdl-list__item-primary-content .parking__color-state {
+    background-color: hsla(120, 60%, 30%, 1);
 }
 
-.mdl-card__media {
-    margin: 0;
+.mdl-list__item-primary-content .parking__color-state--green {
+    background-color: hsla(120, 60%, 30%, 1);
 }
 
-.mdl-card__media > img {
-    width: 100%;
+.mdl-list__item-primary-content .parking__color-state--orange {
+    background-color: hsla(45, 60%, 30%, 1);
+}
+
+.mdl-list__item-primary-content .parking__color-state--red {
+    background-color: hsla(0, 60%, 30%, 1);
 }

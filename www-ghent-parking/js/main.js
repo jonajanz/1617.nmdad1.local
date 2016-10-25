@@ -12,6 +12,8 @@ ready(function(){
     this.API_URL = 'http://datatank.stad.gent/4/mobiliteit/bezettingparkingsrealtime?callback=json_callback';
     // The results within the JSON-object
     this._parkingStates;
+    // UI generated
+    this._uiGenerated = false;
 
     // Initialize App
     this.init = function() {
@@ -33,6 +35,16 @@ ready(function(){
       xhr.onload = function() {
           if(xhr.status == 200) {
               var data = (!xhr.responseType)?JSON.parse(xhr.response):xhr.response;
+              data = data.sort(function (a, b) {
+                if (a.name > b.name) {
+                  return 1;
+                }
+                if (a.name < b.name) {
+                  return -1;
+                }
+                // a must be equal to b
+                return 0;
+              });
               that._parkingStates = data;
               that.updateUI();
           } else {
@@ -50,8 +62,13 @@ ready(function(){
     this.updateUI = function() {
       console.log('3. Update UI');
 
-      // Call the function generateTableUI
-      this.generateTableUI();
+      if(!this._uiGenerated) {
+        // Call the function generateTableUI
+        this.generateTableUI();
+      } else {
+        
+      }
+      
     };
 
     // Generate the albums as a table with rows
@@ -62,15 +79,15 @@ ready(function(){
       tempStr += '<ul class="demo-list-three mdl-list">';
       for(var i=0;i<this._parkingStates.length;i++) {
         var parking = this._parkingStates[i];
-        tempStr += '<li class="mdl-list__item mdl-list__item--three-line">';
+        tempStr += '<li class="mdl-list__item mdl-list__item--three-line" data-id="' + parking.name.split(' ')[0] + '">';
         tempStr += '<span class="mdl-list__item-primary-content">';
-        tempStr += '<i class="material-icons mdl-list__item-avatar">person</i>';
+        tempStr += '<i class="material-icons mdl-list__item-avatar parking__color-state ' + this.convertStateToColorStateClass(parking.parkingStatus.availableCapacity, parking.parkingStatus.totalCapacity) + '"></i>';
         tempStr += '<span>' + parking.description + '</span>';
         tempStr += '<span class="mdl-list__item-text-body">';
         tempStr += parking.name.split(' ')[0];
         tempStr += '</span>';
         tempStr += '</span>';
-        tempStr += '<span class="mdl-list__item-secondary-content">';
+        tempStr += '<span class="mdl-list__item-secondary-content parking__state">';
         tempStr += parking.parkingStatus.availableCapacity;
         tempStr += '</span>';
         tempStr += '</li>';
@@ -79,7 +96,19 @@ ready(function(){
 
       document.querySelector('.parking-results').innerHTML = tempStr;
       
-    }
+    };
+
+    this.convertStateToColorStateClass = function(available, total) {
+      var perc = Math.round((available / total) * 100);
+      console.log(perc);
+      if(perc >= 60) {
+        return 'parking__color-state--green';
+      } else if(perc < 60 && perc >= 20) {
+        return 'parking__color-state--orange';
+      } else {
+        return 'parking__color-state--red';
+      }
+    };
 
   };
 
