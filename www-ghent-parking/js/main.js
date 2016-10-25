@@ -48,11 +48,11 @@ ready(function(){
               that._parkingStates = data;
               that.updateUI();
           } else {
-              reject(status);
+              console.log(xhr.status);
           }
       }
       xhr.onerror = function() {
-          reject(Error('Network Error!'));
+          console.log(Error('Network Error!'));
       }
       xhr.send();
 
