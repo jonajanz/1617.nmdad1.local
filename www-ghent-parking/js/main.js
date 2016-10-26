@@ -9,7 +9,7 @@ ready(function(){
     function Parking() {
 
     // URL of the Search API
-    this.API_URL = 'http://datatank.stad.gent/4/mobiliteit/bezettingparkingsrealtime?callback=json_callback';
+    this.API_URL = 'http://datatank.stad.gent/4/mobiliteit/bezettingparkingsrealtime.json?callback=json_callback';
     // The results within the JSON-object
     this._previousParkingStates;
     this._parkingStates;
@@ -95,8 +95,8 @@ ready(function(){
         tempStr += '</span>';
         tempStr += '</span>';
         tempStr += '<span class="mdl-list__item-secondary-content parking__state">';
-        tempStr += '<span class="state__indicator ' + this.convertStateToIndication(parkingPrevious.parkingStatus.availableCapacity, parking.parkingStatus.availableCapacity) + '"></span>';
         tempStr += '<span class="state__available">' + parking.parkingStatus.availableCapacity + '</span>';
+        tempStr += '<span class="state__indicator ' + this.convertStateToIndication(parkingPrevious.parkingStatus.availableCapacity, parking.parkingStatus.availableCapacity) + '"></span>'; 
         tempStr += '</span>';
         tempStr += '</li>';
       };

@@ -33,3 +33,19 @@
 .state__indicator--equal::before {
     content: '\0003D';
 }
+
+.mdl-list__item--three-line .mdl-list__item-secondary-content {
+    height: auto;
+}
+
+.mdl-list__item-secondary-content.parking__state {
+    flex-flow: row;
+}
+
+.parking__state .state__indicator {
+    font-weight: 700;
+    font-size: 1.4rem;
+    text-align: center;
+    padding-left: 8px;
+    padding-right: 8px;
+}
