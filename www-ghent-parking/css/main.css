@@ -1,15 +1,35 @@
 .mdl-list__item-primary-content .parking__color-state {
-    background-color: hsla(120, 60%, 30%, 1);
+    background-color: hsla(120, 60%, 50%, 1);
 }
 
 .mdl-list__item-primary-content .parking__color-state--green {
-    background-color: hsla(120, 60%, 30%, 1);
+    background-color: hsla(120, 60%, 50%, 1);
 }
 
 .mdl-list__item-primary-content .parking__color-state--orange {
-    background-color: hsla(45, 60%, 30%, 1);
+    background-color: hsla(45, 60%, 50%, 1);
 }
 
 .mdl-list__item-primary-content .parking__color-state--red {
-    background-color: hsla(0, 60%, 30%, 1);
+    background-color: hsla(0, 60%, 50%, 1);
+}
+
+.state__indicator {
+    float: left;
+}
+
+.state__indicator::before {
+    display: inline;
+}
+
+.state__indicator--up::before {
+    content: '\02191';
+}
+
+.state__indicator--down::before {
+    content: '\02193';
+}
+
+.state__indicator--equal::before {
+    content: '\0003D';
 }
