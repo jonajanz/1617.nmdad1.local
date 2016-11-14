@@ -43,6 +43,11 @@ ready(function(){
         var result = this._tweetsDbContext.deleteTweet(tweet.Id);
         console.log(result);
         */
+
+        this.registerEventListeners(); // Register all events for all active UI elements
+      },
+      "registerEventListeners": function() {
+        
       }
     };
 
