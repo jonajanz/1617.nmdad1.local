@@ -75,18 +75,26 @@ ready(function(){
       var tempStr = '';
       for(var i=0;i<this._visitGentEvents.length;i++) {
         var event = this._visitGentEvents[i];
-        /*tempStr += '<li class="mdl-list__item mdl-list__item--three-line" data-id="' + event.id + '" data-language="' + event.language + '">';
-        tempStr += '<span class="mdl-list__item-primary-content">';
-        tempStr += '<i class="material-icons mdl-list__item-avatar event__thumb"><img src="' + event.thumbs[0] + '" /></i>';
-        tempStr += '<span>' + event.title + '</span>';
-        tempStr += '<section class="mdl-list__item-text-body">' +  '<section class="event__summary">' + event.summary + '</section>' + '<section class="event__description">' + event.description + '<section>' + '</section>';
-        tempStr += '</span>';
-        tempStr += '<span class="mdl-list__item-secondary-content parking__state">';
-        tempStr += '</span>';
-        tempStr += '</li>';*/
         tempStr += '<section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp" data-id="' + event.id + '" data-language="' + event.language + '">';
-        tempStr += '<header class="section__play-btn mdl-cell mdl-cell--3-col-desktop mdl-cell--2-col-tablet mdl-cell--4-col-phone mdl-color--teal-100 mdl-color-text--white">';
+        tempStr += '<header class="mdl-cell mdl-cell--3-col-desktop mdl-cell--2-col-tablet mdl-cell--4-col-phone mdl-color--teal-100 mdl-color-text--white">';
         tempStr += '<picture class="event__picture"><img src="' + event.images[0] + '" /></picture>';
+        tempStr += '<section class="event_openinghours">' + event.openinghours_short + '</span>';
+        if(event.category != null && event.category.length > 0) {
+          tempStr += '<ul class="event__categories">';
+          for(var c=0;c<event.category.length;c++) {
+            var category = event.category[c];
+            tempStr += '<li data-cid="' + category.tid + '">' + category.name + '</li>';
+          }
+          tempStr += '</ul>';
+        }
+        if(event.prices != null && event.prices.length > 0) {
+          tempStr += '<ul class="event__prices">';
+          for(var c=0;c<event.prices.length;c++) {
+            var price = event.prices[c];
+            tempStr += '<li>' + price.type + ': ' + price.price + ' €</li>';
+          }
+          tempStr += '</ul>';
+        }
         tempStr += '</header>';
         tempStr += '<div class="mdl-card mdl-cell mdl-cell--9-col-desktop mdl-cell--6-col-tablet mdl-cell--4-col-phone">';
         tempStr += '<div class="mdl-card__supporting-text">';
@@ -95,7 +103,36 @@ ready(function(){
         tempStr += event.description;
         tempStr += '</div>';
         tempStr += '<div class="mdl-card__actions">';
-        tempStr += '<span>' + event.openinghours_short + '</span>';
+        if(event.contact != null && event.contact.length > 0) {
+          tempStr += '<ul class="event__contacts">';
+          for(var c=0;c<event.contact.length;c++) {
+            var contact = event.contact[c];
+            tempStr += '<li>' 
+            tempStr += contact.contact;
+            tempStr += '<br>' + contact.street + ((contact.number != null)?' '+contact.number:'');
+            tempStr += '<br>' + contact.city;
+            if(contact.phone != null && contact.phone.length > 0) {
+              for(var p=0;p<contact.phone.length;p++) {
+                var phone = contact.phone[p];
+                tempStr += '<br>' + phone.number;
+              }
+            }
+            if(contact.email != null && contact.email.length > 0) {
+              for(var e=0;e<contact.email.length;e++) {
+                var email = contact.email[e];
+                tempStr += '<br>' + '<a href="mailto:' + email + '?subject=Contact via AHS">' + email + '</a>';
+              }
+            }
+            if(contact.website != null && contact.website.length > 0) {
+              for(var w=0;w<contact.website.length;w++) {
+                var website = contact.website[w];
+                tempStr += '<br>' + '<a href="' + website.url + '" title="' + website.title + '">' + website.title + '</a>';
+              }
+            }
+            tempStr += '</li>';
+          }
+          tempStr += '</ul>';
+        }
         tempStr += '</div>';
         tempStr += '</div>';
         tempStr += '<button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="btn1">';
