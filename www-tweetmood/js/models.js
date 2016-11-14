@@ -1,5 +1,5 @@
 // Simulation of enumeration in JavaScript
-var Mood = {
+var Moods = {
     NEUTRAL: 0,
     HAPPY: 1,
     SAD: 2,
@@ -14,7 +14,7 @@ var Mood = {
 function Tweet() {
     this.Id;
     this.Content;
-    this.Mood = Mood.NEUTRAL;
+    this.Mood = Moods.NEUTRAL;
     this.CreatedAt;
     this.UpdatedAt;
     this.DeletedAt;

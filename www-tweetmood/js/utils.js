@@ -56,6 +56,12 @@ var Utils = {
             }
         });
     },
+    pluralize: function (count, word) {
+        return count === 1 ? word : word + 's';
+    },
+    trim: function(str){
+        return str.replace(/^\s+|\s+$/gm,'');
+    },
     guid: function(){
         var i, random;
         var uuid = '';

@@ -27,6 +27,25 @@
 	</head>
 	<body>
 
+    <form id="frm-tweet-create">
+      <fieldset>
+        <legend>Create a new Tweet</legend>
+        <textarea id="txtTweetContent" name="txtTweetContent" rows="4" cols="50" placeholder="Write your tweet here ..." maxlength="280" minlength="4" required="required"></textarea>
+        <div class="rdbgMood">
+          <input type="radio" name="mood" value="Neutral" id="mood-neutral" required="required"/>
+          <label for="mood-neutral">Neutral mood</label>
+          <input type="radio" name="mood" value="Happy" id="mood-happy" />
+          <label for="mood-happy">Happy mood</label>
+          <input type="radio" name="mood" value="Sad" id="mood-sad" />
+          <label for="mood-sad">Sad mood</label>
+        </div>
+        <button type="submit" class="btn btn--primary"><span class="fa fa-edit"></span>Tweet</button>
+        <span class="tweetContentAmount">280</span>
+      </fieldset>
+    </form>
+    <div class="list-tweets">
+    </div>
+
     <!-- External JS-libraries: None at this moment -->
     <script src="https://code.getmdl.io/1.2.1/material.min.js"></script>
 
