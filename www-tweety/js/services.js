@@ -17,5 +17,11 @@ var TweetsDbContext = {
             "tweets": [],
             "settings": {}
         };
+        // Get the stored data. If not present store the _tweetsData into the localstorage.
+        if(Utils.store(this._connString) != null) {
+            this._tweetsData = Utils.store(this._connString);
+        } else {
+            Utils.store(this._connString, this._tweetsData);
+        }
     }
 };
