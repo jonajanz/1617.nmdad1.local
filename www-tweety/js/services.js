@@ -51,5 +51,23 @@ var TweetsDbContext = {
             return null;
         }
         return tweet;
+    },
+    "addTweet": function(tweet) {
+
+    },
+    "updateTweet": function(tweet) {
+        
+    },
+    "deleteTweet": function(id) {
+        
+    },
+    "softDeleteTweet": function(id) {
+        
+    },
+    "softUnDeleteTweet": function(id) {
+        
+    },
+    "save": function() {
+        
     }
 };
