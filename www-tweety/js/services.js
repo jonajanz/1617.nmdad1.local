@@ -67,16 +67,51 @@ var TweetsDbContext = {
         if(orginalTweet == null) {
             return false;
         }
-
+        var index = this.findTweetIndexById(tweet.Id);
+        if(index == -1) {
+            return false;
+        }
+        tweet.UpdatedAt = new Date().getTime();
+        this._tweetsData.tweets[index] = tweet;
+        this.save();
+        return true;
     },
     "deleteTweet": function(id) {
-        
+        var orginalTweet = this.getTweetById(tweet.Id);
+        if(orginalTweet == null) {
+            return false;
+        }
+        var index = this.findTweetIndexById(tweet.Id);
+        if(index == -1) {
+            return false;
+        }
+        this._tweetsData.tweets.splice(index, 1);
+        this.save();
+        return true;
     },
     "softDeleteTweet": function(id) {
-        
+        var index = this.findTweetIndexById(tweet.Id);
+        if(index == -1) {
+            return false;
+        }
+        var tweet = this._tweetsData.tweets[index];
+        tweet.UpdatedAt = new Date().getTime();
+        tweet.DeletedAt = new Date().getTime();
+        this._tweetsData.tweets[index] = tweet;
+        this.save();
+        return true;
     },
     "softUnDeleteTweet": function(id) {
-        
+        var index = this.findTweetIndexById(tweet.Id);
+        if(index == -1) {
+            return false;
+        }
+        var tweet = this._tweetsData.tweets[index];
+        tweet.UpdatedAt = new Date().getTime();
+        tweet.DeletedAt = null;
+        this._tweetsData.tweets[index] = tweet;
+        this.save();
+        return true;
     },
     "findTweetIndexById": function(id) {
         var tweets = this.getTweets();
