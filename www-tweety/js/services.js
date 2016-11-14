@@ -32,25 +32,11 @@ var TweetsDbContext = {
         return tweets;
     },
     "getTweetById": function(id) {
-        var tweets = this.getTweets();
-        if(tweets == null) {
+        var index = this.findTweetIndexById(id);
+        if(index == -1) {
             return null;
         }
-
-        var match = false, i = 0, tweet = null;
-        while(!match && i < tweets.length) {
-            tweet = tweets[i];
-            if(tweet.Id == id) {
-                match = true;
-            } else {
-                i++;
-            }
-        }
-
-        if(!match) {
-            return null;
-        }
-        return tweet;
+        return this._tweetsData.tweets[index];
     },
     "addTweet": function(tweet) {
         if(tweet != null && (tweet.id == undefined || this.getTweetById(tweet.Id) == null)) {
@@ -63,10 +49,6 @@ var TweetsDbContext = {
         return null;
     },
     "updateTweet": function(tweet) {
-        var orginalTweet = this.getTweetById(tweet.Id);
-        if(orginalTweet == null) {
-            return false;
-        }
         var index = this.findTweetIndexById(tweet.Id);
         if(index == -1) {
             return false;
@@ -77,10 +59,6 @@ var TweetsDbContext = {
         return true;
     },
     "deleteTweet": function(id) {
-        var orginalTweet = this.getTweetById(tweet.Id);
-        if(orginalTweet == null) {
-            return false;
-        }
         var index = this.findTweetIndexById(tweet.Id);
         if(index == -1) {
             return false;
