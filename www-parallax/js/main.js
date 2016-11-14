@@ -38,6 +38,9 @@ ready(function(){
 });
 
 /*
-ScrollMagic : http://scrollmagic.io/, https://github.com/janpaepke/ScrollMagic
-CreateJS    : http://www.createjs.com/
+ScrollMagic     : http://scrollmagic.io/, https://github.com/janpaepke/ScrollMagic
+Skrollr         : https://github.com/Prinzhorn/skrollr
+Multiscroll.js  : http://alvarotrigo.com/multiScroll/#first
+Pagepiling.js   : http://www.alvarotrigo.com/pagePiling/#page1
+CreateJS        : http://www.createjs.com/
 */
