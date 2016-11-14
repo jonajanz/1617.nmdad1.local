@@ -53,10 +53,21 @@ var TweetsDbContext = {
         return tweet;
     },
     "addTweet": function(tweet) {
-
+        if(tweet != null && (tweet.id == undefined || this.getTweetById(tweet.Id) == null)) {
+            tweet.Id = Utils.guid();
+            tweet.CreatedAt = new Date().getTime();
+            this._tweetsData.tweets.push(tweet);
+            this.save();
+            return tweet;
+        }
+        return null;
     },
     "updateTweet": function(tweet) {
-        
+        var orginalTweet = this.getTweetById(tweet.Id);
+        if(orginalTweet == null) {
+            return false;
+        }
+
     },
     "deleteTweet": function(id) {
         
@@ -67,7 +78,28 @@ var TweetsDbContext = {
     "softUnDeleteTweet": function(id) {
         
     },
+    "findTweetIndexById": function(id) {
+        var tweets = this.getTweets();
+        if(tweets == null) {
+            return -1;
+        }
+
+        var match = false, i = 0, tweet = null;
+        while(!match && i < tweets.length) {
+            tweet = tweets[i];
+            if(tweet.Id == id) {
+                match = true;
+            } else {
+                i++;
+            }
+        }
+
+        if(!match) {
+            return -1;
+        }
+        return i;
+    },
     "save": function() {
-        
+
     }
 };
