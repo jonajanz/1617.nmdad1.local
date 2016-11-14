@@ -24,7 +24,7 @@ ready(function(){
     window.addEventListener("scroll", function() {
         var scrolledHeight = window.pageYOffset;
         $$(".parallax").forEach(function(el,index,array) {
-            var limit = el.offsetTop+ el.offsetHeight;
+            var limit = el.offsetTop + el.offsetHeight;
 
             if(scrolledHeight > el.offsetTop && scrolledHeight <= limit) {
                 el.style.backgroundPositionY = (scrolledHeight - el.offsetTop) / 1.28 + "px";
@@ -36,3 +36,8 @@ ready(function(){
     });
 
 });
+
+/*
+ScrollMagic : http://scrollmagic.io/, https://github.com/janpaepke/ScrollMagic
+CreateJS    : http://www.createjs.com/
+*/
