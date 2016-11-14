@@ -5,7 +5,7 @@ TweetsDbContext
 2) Caching
 */
 var TweetsDbContext = {
-    init: function(connString) {
+    "init": function(connString) {
         this._connString = connString; // Save connection string in local variable
         this._tweetsData = {
             "info": {

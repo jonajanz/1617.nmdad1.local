@@ -8,7 +8,8 @@ ready(function(){
     
     var App = {
       "init": function() {
-        console.log("pietenpact");
+        this._tweetsDbContext = TweetsDbContext; // Create a reference to the TweetsDbContext object
+        this._tweetsDbContext.init('ahs.dds.tweety');
       }
     };
 
