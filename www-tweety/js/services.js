@@ -90,7 +90,7 @@ var TweetsDbContext = {
         return true;
     },
     "softDeleteTweet": function(id) {
-        var index = this.findTweetIndexById(tweet.Id);
+        var index = this.findTweetIndexById(id);
         if(index == -1) {
             return false;
         }
@@ -102,7 +102,7 @@ var TweetsDbContext = {
         return true;
     },
     "softUnDeleteTweet": function(id) {
-        var index = this.findTweetIndexById(tweet.Id);
+        var index = this.findTweetIndexById(id);
         if(index == -1) {
             return false;
         }
@@ -135,6 +135,7 @@ var TweetsDbContext = {
         return i;
     },
     "save": function() {
-
+        Utils.store(this._connString, this._tweetsData);
+        return true;
     }
 };
