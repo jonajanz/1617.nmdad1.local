@@ -12,7 +12,10 @@ var Mood = {
 
 // Tweet class
 function Tweet() {
-    this.content = null;
-    this.mood = Mood.NEUTRAL;
-    this.createdAt = null;
+    this.Id;
+    this.Content;
+    this.Mood = Mood.NEUTRAL;
+    this.CreatedAt;
+    this.UpdatedAt;
+    this.DeletedAt;
 };
