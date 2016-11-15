@@ -32,5 +32,29 @@ var ApplicationDbContext = {
             return null;
         }
         return posts;
+    },
+    "getPostById": function(id) {
+
+    },
+    "findPostIndexById": function(id) {
+        var posts = this.getPosts();
+        if(posts == null) {
+            return -1;
+        }
+
+        var match = false, i = 0, post = null;
+        while(!match && i < posts.length) {
+            post = posts[i];
+            if(post.Id == id) {
+                match = true;
+            } else {
+                i++;
+            }
+        }
+
+        if(!match) {
+            return -1;
+        }
+        return i;
     }
 };
