@@ -25,5 +25,12 @@ var ApplicationDbContext = {
         } else {
             Utils.store(this._strConnection, this._dbData);
         }
+    },
+    "getPosts": function() {
+        var posts = this._dbData.posts;
+        if(posts == null || (posts != null && posts.length == 0)) {
+            return null;
+        }
+        return posts;
     }
 };
