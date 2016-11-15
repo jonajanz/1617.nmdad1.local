@@ -41,22 +41,61 @@ var ApplicationDbContext = {
         return this._dbData.posts[index];
     },
     "addPost": function(post) {
-
+        if(post != null && (post.Id == undefined || this.getPostById(post.Id) == null)) {
+            post.Id = Utils.guid();
+            post.CreatedAt = new Date().getTime();
+            this._dbData.posts.push(post);
+            this.save();
+            return post;
+        }
+        return null;
     },
     "updatePost": function(post) {
-
+        var index = this.findPostIndexById(post.Id);
+        if(index == -1) {
+            return false;
+        }
+        post.UpdatedAt = new Date().getTime();
+        this._dbData.posts[index] = post;
+        this.save();
+        return true;
     },
     "deletePost": function(id) {
-
+        var index = this.findPostIndexById(id);
+        if(index == -1) {
+            return false;
+        }
+        this._dbData.posts.splice(index, 1);
+        this.save();
+        return true;
     },
     "softDeletePost": function(id) {
-
+        var index = this.findPostIndexById(id);
+        if(index == -1) {
+            return false;
+        }
+        var post =  this._dbData.posts[index];
+        post.UpdatedAt = new Date().getTime();
+        post.DeletedAt = new Date().getTime();
+        this._dbData.posts[index] = post;
+        this.save();
+        return true;
     },
     "softUnDeletePost": function(id) {
-
-    },
+         var index = this.findPostIndexById(id);
+        if(index == -1) {
+            return false;
+        }
+        var post =  this._dbData.posts[index];
+        post.UpdatedAt = new Date().getTime();
+        post.DeletedAt = null;
+        this._dbData.posts[index] = post;
+        this.save();
+        return true;
+    }, 
     "save": function() {
-
+        Utils.store(this._strConnection, this._dbData); // Write the _dbData into the localstorage via the key
+        return true; // Always true in modern webbrowsers
     },
     "findPostIndexById": function(id) {
         var posts = this.getPosts();
