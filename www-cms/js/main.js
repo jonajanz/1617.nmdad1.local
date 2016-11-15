@@ -8,10 +8,76 @@ ready(function(){
 
     var App = {
         "init": function() {
+            this._unitTesting = false; // Unit Testing the ApplicationDbContext or not
+
             this._applicationDbContext = ApplicationDbContext; // Reference to the ApplicationDbContext object
             this._applicationDbContext.init('ahs.dds.cms'); // Intialize the ApplicationDbContext with the connection string as parameter value
+
+            this._frmPostCreate = document.querySelector('#frm-post-create'); // Cache Form Post Create
+            this._listPosts = document.querySelector('.list-posts'); // Cache List Posts
+
+            this.registerEventListeners(); // Register all Event Listeners
             
-            this.unitTestPosts(); // Unit Testing: Posts
+            if(this._unitTesting) {
+                this.unitTestPosts(); // Unit Testing: Posts
+            }
+
+            this.updateUIPostsList(); // Update UI for list of posts
+        },
+        "registerEventListeners": function() {
+
+            // Event Listeners for Form Post Create
+            if(this._frmPostCreate != null) {
+                var self = this; // Hack for this keyword within an event listener of another object
+                
+                this._frmPostCreate.addEventListener('submit', function(ev) {
+                    ev.preventDefault();
+                    
+                    var post = new Post(); // Create a new Post Object
+                    post.Title = Utils.trim(this.querySelectorAll('[name="txtTitle"]')[0].value);
+                    post.Synopsis = Utils.trim(this.querySelectorAll('[name="txtSynopsis"]')[0].value);
+                    post.Story = Utils.trim(this.querySelectorAll('[name="txtStory"]')[0].value);
+                
+                    // Add Post via the ApplicationDbContext to the localstorage
+                    var addedPost = self._applicationDbContext.addPost(post);
+                    if(addedPost != null) {
+                        self.updateUIPostsList();
+                    }
+                    
+                    return false;
+                });
+            }
+
+        },
+        "updateUIPostsList": function() {
+            var posts = this._applicationDbContext.getPosts(); // Get all posts via the ApplicationDbContext
+
+            if(this._listPosts != null) {
+
+                if(posts != null && posts.length > 0)
+                {
+                    var strHTML = '', post = null;
+                    for(var i=0; i < posts.length;i++) {
+                        post = posts[i]; // Get post from the array of posts by certain index i
+                        strHTML += '<div class="mdl-card mdl-cell mdl-cell--12-col-desktop mdl-cell--12-col-tablet mdl-cell--12-col-phone  mdl-shadow--2dp tweet' + ((post.DeletedAt != null)?' tweet--softdeleted':'') + '" data-id="' + post.Id + '">';
+                        strHTML += '<div class="mdl-card__supporting-text">';
+                        strHTML += '<h4>' + post.Title + '</h4>';
+                        strHTML += '<p>' + post.Synopsis + '</p>';
+                        strHTML += '</div>';
+                        strHTML += '<button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="btn-' + post.Id + '">';
+                        strHTML += '<i class="material-icons">more_vert</i>';
+                        strHTML += '</button>';
+                        strHTML += '<ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right" for="btn-' + post.Id + '">';
+                        strHTML += '<li class="mdl-menu__item">Edit</li>';
+                        strHTML += '<li class="mdl-menu__item">Softdelete</li>';
+                        strHTML += '<li class="mdl-menu__item">Delete</li>';
+                        strHTML += '</ul>';
+                        strHTML += '</div>';
+                    }
+                    this._listPosts.innerHTML = strHTML;
+                    componentHandler.upgradeAllRegistered(); // Update Material Design Lite Event Listeners for all new elements into the DOM
+                }
+            }
         },
         "unitTestPosts": function() {
             // TEST
