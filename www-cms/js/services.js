@@ -40,6 +40,24 @@ var ApplicationDbContext = {
         }
         return this._dbData.posts[index];
     },
+    "addPost": function(post) {
+
+    },
+    "updatePost": function(post) {
+
+    },
+    "deletePost": function(id) {
+
+    },
+    "softDeletePost": function(id) {
+
+    },
+    "softUnDeletePost": function(id) {
+
+    },
+    "save": function() {
+
+    },
     "findPostIndexById": function(id) {
         var posts = this.getPosts();
         if(posts == null) {
