@@ -69,7 +69,9 @@ ready(function(){
                         strHTML += '</button>';
                         strHTML += '<ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right" for="btn-' + post.Id + '">';
                         strHTML += '<li class="mdl-menu__item">Edit</li>';
-                        strHTML += '<li class="mdl-menu__item">Softdelete</li>';
+                        strHTML += '<li class="mdl-menu__item">';
+                        strHTML += (post.DeletedAt == null || post.DeletedAt == undefined)?'Soft-delete':'Soft-undelete';
+                        strHTML += '</li>';
                         strHTML += '<li class="mdl-menu__item">Delete</li>';
                         strHTML += '</ul>';
                         strHTML += '</div>';
