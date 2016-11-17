@@ -19,7 +19,7 @@ var ApplicationDbContext = {
             "lecturers": [],
             "timetable": [],
             "settings": []
-        }; // The data as value of the previous connection string (key in the localstorage)
+        }; // JSON-string: The data as value of the previous connection string (key in the localstorage)
         // Save the data in the localstorage. First check if the data is present in the database. If present -> GET THE DATA. If not --> SAVE _dbData in the database
         if(Utils.store(this._strConnection) != null) {
             this._dbData = Utils.store(this._strConnection);
