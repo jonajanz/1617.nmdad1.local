@@ -8,7 +8,9 @@ ready(function(){
 
     var App = {
         "init": function() {
-            this._unitTesting = true; // Unit Testing the features in ApplicationDbContext or not
+            this._unitTesting = false; // Unit Testing the features in ApplicationDbContext or not
+
+            this.URLRANDOMUSERME = 'http://api.randomuser.me/?results=200&callback=json_callback';// Cache the url with random users in variable URLRANDOMUSERME
 
             this._applicationDbContext = ApplicationDbContext; // Reference to the ApplicationDbContext object
             this._applicationDbContext.init('ahs.gdm.mmp.lecturerama'); // Initialize the ApplicationDbContext object via the methode init. Do not forget the connection string as a parametervalue of this function
@@ -16,19 +18,54 @@ ready(function(){
             if(this._unitTesting) {
                 this.unitTests();
             }
+
+            this.updateUI();
+        },
+        "updateUI": function() {
+            var tempStr = '';
+            var ch = window.innerHeight - 110;
+            tempStr += '<div class="lecturer" style="height:' + ch + 'px;">';
+            
+            var lecturers = this._applicationDbContext.getLecturers(), lecturer = null;
+            for(var i=0;i<lecturers.length;i++) {
+                var lecturer = lecturers[i];
+                tempStr += '<picture class="lecturer__picture">';
+                tempStr += '<img src="' + lecturer.Picture + '" />';
+                tempStr += '</picture>';
+                tempStr += '<h3 class="lecturer_name">' + lecturer.FirstName + ' ' + lecturer.SurName + '</h3>';
+            };
+
+            tempStr += '</div>';
+
+            document.querySelector('.list-lecturers').innerHTML = tempStr;
         },
         "unitTests": function() {
 
+            var self = this; // Closure
+
             //Unit Testing the Lecturers
             if(this._applicationDbContext.getLecturers() == null) {
-                // Create lecturers
-                var lecturer = new Lecturer();
-                lecturer.FirstName = "Philippe";
-                lecturer.SurName = "De Pauw - Waterschoot";
-                lecturer.DayOfBirth = new Date(1982, 12, 12);
-                lecturer.Email = "philippe.depauw@arteveldehs.be";
-                var lecturerAdded = this._applicationDbContext.addLecturer(lecturer);
-                console.log(lecturerAdded);
+
+                // Load JSON from corresponding RandomUserMe API with certain URL
+                Utils.getJSONPByPromise(this.URLRANDOMUSERME).then(
+                    function(data) {
+                        var users = data.results, lecturer = null, user = null;
+                        for(var i=0;i<users.length;i++) {
+                            user = users[i];
+                            lecturer = new Lecturer();
+                            lecturer.FirstName = user.name.first;
+                            lecturer.SurName = user.name.last;
+                            lecturer.DayOfBirth = new Date(user.dob);
+                            lecturer.Email = user.email;
+                            lecturer.Picture = user.picture.large;
+                            var lecturerAdded = self._applicationDbContext.addLecturer(lecturer);
+                            console.log(lecturerAdded);
+                        }
+                    },
+                    function(status) {
+                        console.log(status);
+                    }
+                );
 
             } else {
                 // Update a lecturer
