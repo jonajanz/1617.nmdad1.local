@@ -26,5 +26,28 @@ var ApplicationDbContext = {
         } else {
             Utils.store(this._strConnection, this._dbData);
         }
+    },
+    "getLecturers": function() {
+        // Get all lecturers
+    },
+    "getLecturerById": function(id) {
+        // Get lecturer by id
+    },
+    "addLecturer": function(lecturer) {
+        // Add a new lecturer (CREATE -> DB INSERT)
+    },
+    "updateLecturer": function(lecturer) {
+        // Update an existing lecturer (UPDATE -> DB UPDATE)
+    },
+    "deleteLecturer": function(id) {
+        // Delete an existing lecturer (DELETE -> DB DELETE)
+    },
+    "softDeleteLecturer": function(id) {
+        // Soft Delete an existing lecturer (UPDATE -> DB UPDATE)
+        // Field: DeletedAt = Snapshot in time
+    },
+    "softUndeleteLecturer": function(id) {
+        // Soft UnDelete an existing lecturer (UPDATE -> DB UPDATE)
+        // Field: DeletedAt = null
     }
 };

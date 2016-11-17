@@ -8,4 +8,8 @@ function Lecturer() {
     this.DayOfBirth;
 
     this.Email;
+
+    this.CreatedAt;
+    this.UpdatedAt;
+    this.DeletedAt;
 }
