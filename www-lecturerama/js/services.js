@@ -49,5 +49,13 @@ var ApplicationDbContext = {
     "softUndeleteLecturer": function(id) {
         // Soft UnDelete an existing lecturer (UPDATE -> DB UPDATE)
         // Field: DeletedAt = null
+    },
+    "save": function() {
+        // Save _dbData into the database (localstorage)
+        Utils.store(this._strConnection, this._dbData);
+        return true;
+    },
+    "findLecturerIndexById": function(id) {
+        // Find the index of the lecturer by id
     }
 };
