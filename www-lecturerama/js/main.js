@@ -22,22 +22,24 @@ ready(function(){
             this.updateUI();
         },
         "updateUI": function() {
-            var tempStr = '';
-            var ch = window.innerHeight - 110;
-            tempStr += '<div class="lecturer" style="height:' + ch + 'px;">';
-            
-            var lecturers = this._applicationDbContext.getLecturers(), lecturer = null;
-            for(var i=0;i<lecturers.length;i++) {
-                var lecturer = lecturers[i];
-                tempStr += '<picture class="lecturer__picture">';
-                tempStr += '<img src="' + lecturer.Picture + '" />';
-                tempStr += '</picture>';
-                tempStr += '<h3 class="lecturer_name">' + lecturer.FirstName + ' ' + lecturer.SurName + '</h3>';
-            };
+            if(this._applicationDbContext.getLecturers() != null) {
+                var tempStr = '';
+                var ch = window.innerHeight - 110;
+                
+                var lecturers = this._applicationDbContext.getLecturers(), lecturer = null;
+                for(var i=0;i<lecturers.length;i++) {
+                    var lecturer = lecturers[i];
+                    tempStr += '<div class="lecturer">';
+                    tempStr += '<div class="lecturer__meta">' + '<span class="lecturer__age">' + Utils.getAge(new Date(lecturer.DayOfBirth)) + '</span>' + '</div>';
+                    tempStr += '<picture class="lecturer__picture">';
+                    tempStr += '<img src="' + lecturer.Picture + '" />';
+                    tempStr += '</picture>';
+                    tempStr += '<h3 class="lecturer__name">' + lecturer.FirstName + ' ' + lecturer.SurName + '</h3>';
+                    tempStr += '<div class="lecturer__actions"><span class="material-icons like">&#xE87D;</span><span class="material-icons dislike">&#xE043;</span></div>';
+                };
 
-            tempStr += '</div>';
-
-            document.querySelector('.list-lecturers').innerHTML = tempStr;
+                document.querySelector('.list-lecturers').innerHTML = tempStr;
+            }
         },
         "unitTests": function() {
 

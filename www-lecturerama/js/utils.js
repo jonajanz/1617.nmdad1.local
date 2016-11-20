@@ -82,5 +82,16 @@ var Utils = {
             var storedData = localStorage.getItem(namespace);
             return (storedData && JSON.parse(storedData)) || null;
         }
+    },
+    getAge: function(dayOfBirth) {
+        var now = new Date();
+        var thisYear = 0;
+        if (now.getMonth() < dayOfBirth.getMonth()) {
+            thisYear = 1;
+        } else if ((now.getMonth() == dayOfBirth.getMonth()) && now.getDate() < dayOfBirth.getDate()) {
+            thisYear = 1;
+        }
+        var age = now.getFullYear() - dayOfBirth.getFullYear() - thisYear;
+        return age;
     }
 }
