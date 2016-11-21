@@ -17,6 +17,7 @@ var ApplicationDbContext = {
                 "author": "AHS - GDM - MMP"
             },
             "lecturers": [],
+            "matchedlecturers": [],
             "timetable": [],
             "settings": []
         }; // JSON-string: The data as value of the previous connection string (key in the localstorage)
