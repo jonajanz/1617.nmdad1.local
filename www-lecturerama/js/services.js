@@ -17,7 +17,7 @@ var ApplicationDbContext = {
                 "author": "AHS - GDM - MMP"
             },
             "lecturers": [],
-            "matchedlecturers": [],
+            "tinderizedlecturers": [],
             "timetable": [],
             "settings": []
         }; // JSON-string: The data as value of the previous connection string (key in the localstorage)
@@ -103,6 +103,16 @@ var ApplicationDbContext = {
         this._dbData.lecturers[index] = lecturer;
         this.save();
         return true;
+    },
+    "addTinderizeLecturer": function(tinderizedLecturer) {
+        // Add a new lecturer (CREATE -> DB INSERT)
+        if(tinderizedLecturer != null) {
+            tinderizedLecturer.CreatedAt = new Date().getTime();
+            this._dbData.tinderizedlecturers.push(tinderizedLecturer);
+            this.save();
+            return tinderizedLecturer;
+        }
+        return null;
     },
     "save": function() {
         // Save _dbData into the database (localstorage)

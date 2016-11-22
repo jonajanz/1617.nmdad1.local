@@ -18,6 +18,9 @@ body {
   margin: 0;
   padding: 8px;
 }
+.lecturer__gender {
+  margin-right : 8px;
+}
 .lecturer__name {
   background: rgba(242, 242, 242, 1);
   margin: 0;
