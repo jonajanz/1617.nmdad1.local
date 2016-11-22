@@ -35,11 +35,11 @@ ready(function(){
             }
         },
         "updateUIOldSchoolLecturers": function() {
-            if(this._applicationDbContext.getLecturers() != null) {
+            if(this._applicationDbContext.getTinderizeLecturersByUserId(this._myGUID) != null) {
                 var tempStr = '';
                 var ch = window.innerHeight - 110;
                 
-                var lecturers = this._applicationDbContext.getLecturers(), lecturer = null;
+                var lecturers = this._applicationDbContext.getTinderizeLecturersByUserId(this._myGUID), lecturer = null;
                 for(var i=0;i<lecturers.length;i++) {
                     var lecturer = lecturers[i];
                     tempStr += '<div class="lecturer" data-id="' + lecturer.Id + '">';
@@ -65,7 +65,7 @@ ready(function(){
 				var src = document.querySelector(hbsTmplId).innerHTML;// Get the contents from the specified hbs template
 				this._hbsCache[hbsTmplName] = Handlebars.compile(src);// Compile the source and add it to the hbs cache
 			}	
-			document.querySelector('.list-lecturers').innerHTML = this._hbsCache[hbsTmplName](this._applicationDbContext.getLecturers());// Write compiled content to the appropriate container
+			document.querySelector('.list-lecturers').innerHTML = this._hbsCache[hbsTmplName](this._applicationDbContext.getTinderizeLecturersByUserId(this._myGUID));// Write compiled content to the appropriate container
 
             this.registerLecturerEventListeners(); // Register EventListeners for all like and dislike buttons
         },
@@ -90,6 +90,7 @@ ready(function(){
             var tinderizeLecturer = new TinderizeLecturer();
             tinderizeLecturer.UserId = this._myGUID;
             tinderizeLecturer.LecturerId = lecturerId;
+            tinderizeLecturer.Tinderize = tinderize;
             var tinderizeLecturerAdded = this._applicationDbContext.addTinderizeLecturer(tinderizeLecturer);
 
             if(tinderizeLecturerAdded != null) {

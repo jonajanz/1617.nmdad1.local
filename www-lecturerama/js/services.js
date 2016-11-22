@@ -36,6 +36,22 @@ var ApplicationDbContext = {
         }
         return lecturers;
     },
+    "getTinderizeLecturersByUserId": function(userId) {
+        // Get all lecturers
+        var tinderizedlecturers = this._dbData.tinderizedlecturers;
+        if(tinderizedlecturers == null || (tinderizedlecturers != null && tinderizedlecturers.length == 0)) {
+            return null;
+        }
+        tinderizedlecturers = _.find(tinderizedlecturers, function(tinderizeLecturer) { return tinderizeLecturer.UserId == userId; });
+
+        var lecturers = this.getLecturers(), lecturersFiltered = [];
+
+        _.forEach(tinderizedlecturers, function(tinderizedlecturer) {
+            lecturersFiltered.push(_.find(lecturers, function(lecturer) { return lecturer.Id != tinderizedlecturer.LecturerId; }));
+        });
+
+        return lecturersFiltered;
+    },
     "getLecturerById": function(id) {
         // Get lecturer by id
         var index = this.findLecturerIndexById(id);
