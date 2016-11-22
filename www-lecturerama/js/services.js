@@ -39,24 +39,22 @@ var ApplicationDbContext = {
     "getTinderizeLecturersByUserId": function(userId) {
         // Get all lecturers
         var tinderizedlecturers = this._dbData.tinderizedlecturers;
-        if(tinderizedlecturers == null || (tinderizedlecturers != null && tinderizedlecturers.length == 0)) {
-            return null;
+        if(tinderizedlecturers != null) {
+           tinderizedlecturers = _.filter(tinderizedlecturers, function(tinderizeLecturer) { return tinderizeLecturer.UserId == userId; });
         }
-        tinderizedlecturers = _.filter(tinderizedlecturers, function(tinderizeLecturer) { return tinderizeLecturer.UserId == userId; });
 
-        console.log(tinderizedlecturers);
-
-        var lecturers = this.getLecturers(), lecturersFiltered = [];
+        var lecturers = this.getLecturers();
 
         if(tinderizedlecturers == null || (tinderizedlecturers != null && tinderizedlecturers.length == 0)) {
             return lecturers;
         } else {
+            var self = this;
             _.forEach(tinderizedlecturers, function(tinderizedlecturer) {
-                lecturersFiltered.push(_.filter(lecturers, function(lecturer) { return lecturer.Id != tinderizedlecturer.LecturerId; }));
+                lecturers.splice(self.findLecturerIndexById(tinderizedlecturer.LecturerId), 1);
             });
         }
 
-        return lecturersFiltered;
+        return lecturers;
     },
     "getLecturerById": function(id) {
         // Get lecturer by id
