@@ -42,13 +42,19 @@ var ApplicationDbContext = {
         if(tinderizedlecturers == null || (tinderizedlecturers != null && tinderizedlecturers.length == 0)) {
             return null;
         }
-        tinderizedlecturers = _.find(tinderizedlecturers, function(tinderizeLecturer) { return tinderizeLecturer.UserId == userId; });
+        tinderizedlecturers = _.filter(tinderizedlecturers, function(tinderizeLecturer) { return tinderizeLecturer.UserId == userId; });
+
+        console.log(tinderizedlecturers);
 
         var lecturers = this.getLecturers(), lecturersFiltered = [];
 
-        _.forEach(tinderizedlecturers, function(tinderizedlecturer) {
-            lecturersFiltered.push(_.find(lecturers, function(lecturer) { return lecturer.Id != tinderizedlecturer.LecturerId; }));
-        });
+        if(tinderizedlecturers == null || (tinderizedlecturers != null && tinderizedlecturers.length == 0)) {
+            return lecturers;
+        } else {
+            _.forEach(tinderizedlecturers, function(tinderizedlecturer) {
+                lecturersFiltered.push(_.filter(lecturers, function(lecturer) { return lecturer.Id != tinderizedlecturer.LecturerId; }));
+            });
+        }
 
         return lecturersFiltered;
     },
