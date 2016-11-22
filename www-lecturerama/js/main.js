@@ -9,21 +9,32 @@ ready(function(){
     var App = {
         "init": function() {
             this._unitTesting = false; // Unit Testing the features in ApplicationDbContext or not
+            this._widthHandlebarsAndLoDash = true; // Use Handlebars Template Engine And LoDash or Not
 
             this.URLRANDOMUSERME = 'http://api.randomuser.me/?results=200&callback=json_callback';// Cache the url with random users in variable URLRANDOMUSERME
 
             this._applicationDbContext = ApplicationDbContext; // Reference to the ApplicationDbContext object
             this._applicationDbContext.init('ahs.gdm.mmp.lecturerama'); // Initialize the ApplicationDbContext object via the methode init. Do not forget the connection string as a parametervalue of this function
 
+			this._hbsCache = {};// Handlebars cache for templates
+			this._hbsPartialsCache = {};// Handlebars cache for partials
+
             this._myGUID = '9bdc9e9e-4eea-46e6-99fe-98427224667e'; // Just for emulating the logged in user
 
             if(this._unitTesting || this._applicationDbContext.getLecturers() == null) {
                 this.unitTests();
+            } else {
+                this.updateUI();
             }
-
-            this.updateUI();
         },
         "updateUI": function() {
+            if( this._widthHandlebarsAndLoDash) {
+                this.updateUILecturers('list-lecturers', '#template-list-lecturers');
+            } else {
+                this.updateUIOldSchoolLecturers();
+            }
+        },
+        "updateUIOldSchoolLecturers": function() {
             if(this._applicationDbContext.getLecturers() != null) {
                 var tempStr = '';
                 var ch = window.innerHeight - 110;
@@ -45,10 +56,18 @@ ready(function(){
                 };
 
                 document.querySelector('.list-lecturers').innerHTML = tempStr;
-
-                // Register EventListeners for all like and dislike buttons
-                this.registerLecturerEventListeners();
+                
+                this.registerLecturerEventListeners(); // Register EventListeners for all like and dislike buttons
             }
+        },
+        "updateUILecturers": function(hbsTmplName, hbsTmplId) {
+            if(!this._hbsCache[hbsTmplName]) {
+				var src = document.querySelector(hbsTmplId).innerHTML;// Get the contents from the specified hbs template
+				this._hbsCache[hbsTmplName] = Handlebars.compile(src);// Compile the source and add it to the hbs cache
+			}	
+			document.querySelector('.list-lecturers').innerHTML = this._hbsCache[hbsTmplName](this._applicationDbContext.getLecturers());// Write compiled content to the appropriate container
+
+            this.registerLecturerEventListeners(); // Register EventListeners for all like and dislike buttons
         },
         "registerLecturerEventListeners": function() {
             var self = this;
@@ -72,7 +91,14 @@ ready(function(){
             tinderizeLecturer.UserId = this._myGUID;
             tinderizeLecturer.LecturerId = lecturerId;
             var tinderizeLecturerAdded = this._applicationDbContext.addTinderizeLecturer(tinderizeLecturer);
-            console.log(tinderizeLecturerAdded);
+
+            if(tinderizeLecturerAdded != null) {
+                var lecturerElement = document.querySelector(`.lecturer[data-id="${lecturerId}"]`);
+
+                if(lecturerElement != null) {
+                    lecturerElement.parentElement.removeChild(lecturerElement);
+                }
+            }
         },
         "unitTests": function() {
 

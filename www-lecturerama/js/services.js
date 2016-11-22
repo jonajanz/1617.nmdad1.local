@@ -125,6 +125,14 @@ var ApplicationDbContext = {
         if(lecturers == null) {
             return -1;
         }
+        return _.findIndex(lecturers, function(lecturer) { return lecturer.Id == id; });
+    },
+    "findLecturerIndexByIdOldSchool": function(id) {
+        // Find the index of the lecturer by id
+        var lecturers = this.getLecturers();
+        if(lecturers == null) {
+            return -1;
+        }
 
         var match = false, i = 0, lecturer = null;
         while(!match && i < lecturers.length) {
