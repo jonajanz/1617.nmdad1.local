@@ -55,7 +55,7 @@ ready(function(){
                     tempStr += '</div>';
                 };
 
-                document.querySelector('.list-lecturers').innerHTML = tempStr;
+                document.querySelector('.list-lecturers-content').innerHTML = tempStr;
                 
                 this.registerLecturerEventListeners(); // Register EventListeners for all like and dislike buttons
             }
@@ -65,7 +65,7 @@ ready(function(){
 				var src = document.querySelector(hbsTmplId).innerHTML;// Get the contents from the specified hbs template
 				this._hbsCache[hbsTmplName] = Handlebars.compile(src);// Compile the source and add it to the hbs cache
 			}	
-			document.querySelector('.list-lecturers').innerHTML = this._hbsCache[hbsTmplName](this._applicationDbContext.getTinderizeLecturersByUserId(this._myGUID));// Write compiled content to the appropriate container
+			document.querySelector('.list-lecturers-content').innerHTML = this._hbsCache[hbsTmplName](this._applicationDbContext.getTinderizeLecturersByUserId(this._myGUID));// Write compiled content to the appropriate container
 
             this.registerLecturerEventListeners(); // Register EventListeners for all like and dislike buttons
         },
