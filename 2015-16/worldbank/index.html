@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="nl-be" dir="ltr">
+	<head>
+		<meta charset="UTF-8">
+		<title>Components | Responsive |NMDAD-I</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1">
+		<link rel="stylesheet" href="css/vendor/normalize.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="css/helpers.css">
+		<link rel="stylesheet" href="css/grid.css">
+		<link rel="stylesheet" href="css/jaywalker.css">
+		<link rel="stylesheet" href="css/fonts.css">
+		<link rel="stylesheet" href="css/buttons.css">
+		<link rel="stylesheet" href="css/offcanvas.css">
+		<link rel="stylesheet" href="http://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
+		<link rel="stylesheet" href="css/main.css">
+		<link rel="stylesheet" href="css/home.css">
+		<script src="js/vendor/modernizr-custom.js"></script>
+	</head>
+	<body>
+		<!-- Offcanvas -->
+		<div class="offcanvas">
+			<!-- Offcanvas Header -->
+			<section class="offcanvas__header">
+				<h1>633|&lt;</h1>
+				<a class="navigation-toggle offcanvas__navigation-toggle" href="#" title="Close the offcanvas" data-navtype="offcanvas-open">
+					<span>Close</span>
+				</a>
+			</section>
+			<!-- Offcanvas Navigation -->
+			<nav class="offcanvas__navigation">
+				<ul class="clearfix">
+					<li><a class="navigation__item" href="#/" title="Back to the homepage"><span class="fa fa-home"></span>Countries</a></li>
+					<li><a class="navigation__item" href="#/about" title="Read about the Worldbank Application"><span class="fa fa-user"></span>About</a></li>
+				</ul>
+			</nav><!-- End Offcanvas Navigation -->
+		</div><!-- End Offcanvas -->
+		
+		<!-- Page: Countries -->
+		<div class="page active" id="countries">
+			<!-- Header Wrapper -->
+			<div class="grid__wrapper header-wrapper">
+				<div class="grid__container">
+					<div class="grid__row">
+						<div class="grid__column-bp1-12">
+							<header class="header">
+								<!-- Header Logo -->
+								<section class="header__logo">
+									<h1><a href="index.html" title="Back to the homepage"><span>Responsive Components</span></a></h1>
+									<h2>Responsive grid, navigation, images, ...</h2>
+								</section><!-- End Header Logo -->
+								<!-- Navigation Toggle 
+								data-navtype="headernav-open" when responsive push down menu
+								data-navtype="offcanvas-open" when responsive offcanvas
+								-->
+								<a class="navigation-toggle header__navigation-toggle" href="#" data-navtype="offcanvas-open">
+									<span>Toggle</span>
+								</a><!-- End Navigation Toggle -->
+								<!-- Navigation -->
+								<nav class="header__navigation">
+									<ul class="clearfix">
+										<li><a class="navigation__item" href="#/" title="Back to the homepage">Countries</a></li>
+										<li><a class="navigation__item" href="#/about" title="Read about the Worldbank Application">About</a></li>
+									</ul>
+								</nav><!-- End Navigation -->
+							</header>
+						</div>
+					</div>
+				</div>
+			</div><!-- End Header Wrapper -->
+			<!-- Countries List -->
+			<div class="grid__wrapper main-wrapper">
+				<div class="grid__container">
+					<div class="grid__row">
+						<div class="grid__column-bp1-12">
+							<h1>Countries of the World</h1>
+						</div>
+						<div class="grid__column-bp1-12">
+							<!-- Container for a list layout switcher -->
+							<section class="list-layout">
+								<a class="btn-fa btn-fa-tiles" href="#" data-listlayout="tiles" data-target="countries-list"><span>Tiles</span></a>
+								<a class="btn-fa btn-fa-list" href="#" data-listlayout="list" data-target="countries-list"><span>List</span></a>
+							</section><!-- End Container -->
+							<section class="countries-list"></section>
+						</div>
+					</div>
+				</div>
+			</div><!-- End Countries List -->
+		</div><!-- End Page: Countries -->	
+		
+		<!-- Page: Country Details -->
+		<div class="page active" id="countries_details">
+			<!-- Header Wrapper -->
+			<div class="grid__wrapper header-wrapper">
+				<div class="grid__container">
+					<div class="grid__row">
+						<div class="grid__column-bp1-12">
+							<header class="header">
+								<!-- Navigation Back -->
+								<a class="navigation-back header__navigation-back">
+									<span>BAck</span>
+								</a><!-- End Navigation Toggle -->
+							</header>
+						</div>
+					</div>
+				</div>
+			</div><!-- End Header Wrapper -->
+			<!-- Country -->
+			<div class="grid__wrapper main-wrapper">
+				<div class="grid__container">
+					<div class="grid__row country-details country__details">
+				</div>
+			</div><!-- End Country -->
+		</div><!-- End Page: Country Details -->
+		
+		<!-- Page: About -->
+		<div class="page" id="about">
+			<!-- Header Wrapper -->
+			<div class="grid__wrapper header-wrapper">
+				<div class="grid__container">
+					<div class="grid__row">
+						<div class="grid__column-bp1-12">
+							<header class="header">
+								<!-- Header Logo -->
+								<section class="header__logo">
+									<h1><a href="index.html" title="Back to the homepage"><span>Responsive Components</span></a></h1>
+									<h2>Responsive grid, navigation, images, ...</h2>
+								</section><!-- End Header Logo -->
+								<!-- Navigation Toggle 
+								data-navtype="headernav-open" when responsive push down menu
+								data-navtype="offcanvas-open" when responsive offcanvas
+								-->
+								<a class="navigation-toggle header__navigation-toggle" href="#" data-navtype="offcanvas-open">
+									<span>Toggle</span>
+								</a><!-- End Navigation Toggle -->
+								<!-- Navigation -->
+								<nav class="header__navigation">
+									<ul class="clearfix">
+										<li><a class="navigation__item" href="#/" title="Back to the homepage">Countries</a></li>
+										<li><a class="navigation__item" href="#/about" title="Read about the Worldbank Application">About</a></li>
+									</ul>
+								</nav><!-- End Navigation -->
+							</header>
+						</div>
+					</div>
+				</div>
+			</div><!-- End Header Wrapper -->
+			<!-- Countries List -->
+			<div class="grid__wrapper main-wrapper">
+				<div class="grid__container">
+					<div class="grid__row">
+						<div class="grid__column-bp1-12">
+							<h1>About the Worldbank Application</h1>
+						</div>
+					</div>
+				</div>
+			</div><!-- End Countries List -->
+		</div><!-- End Page: Countries -->
+		
+		<!-- Handlebars Templates -->
+		<script id="countries-tiles-template" type="text/x-handlebars-template">
+			{{#if this}}
+			<ul class="grid__row">
+				{{#each this}}
+				<li class="grid__column-bp1-12 grid__column-bp2-6 grid__column-bp3-4 grid__column-bp4-3">
+					<div class="country__tile" data-id="{{id}}">
+						<img class="country__flag" src="http://www.geonames.org/flags/x/{{toLowerCase iso2Code}}.gif" />
+						<section class="country__title">
+							<h3>{{name}} <small>({{iso2Code}})</small></h3>
+						</section>
+						<section class="country__place">
+							<span class="place__region">{{region.value}}</span>
+							<span class="place__city" data-lat="{{latitude}}" data-lng="{{longitude}}">{{capitalCity}}</span>
+						</section>
+						<section class="country__money">
+							<span class="money__income-level" data-income-id="{{incomeLevel.id}}">{{incomeLevel.value}}</span>
+							<span class="money__lending-type" data-lending-id="{{lendingType.id}}">{{lendingType.value}}</span>
+						</section>
+					</div>
+				</li>
+				{{/each}}
+			</ul>
+			{{else}}
+				<p>No countries present in the Worldbank database!</p>
+			{{/if}}
+		</script>
+		<script id="countries-list-template" type="text/x-handlebars-template">
+			{{#if this}}
+			<ul class="grid__row">
+				{{#each this}}
+				<li class="grid__column-bp1-12">
+					<div class="country__listitem" data-id="{{id}}">
+						<img class="country__flag" src="http://www.geonames.org/flags/x/{{toLowerCase iso2Code}}.gif" />
+						<section class="country__title">
+							<h3>{{name}} <small>({{iso2Code}})</small></h3>
+						</section>
+						<a data-id="{{iso2Code}}" class="btn-readmore" href="#/countries/details/{{iso2Code}}" title="Detail fro the country: {{name}}"><span class="fa fa-chevron-right"></span></a>
+					</div>
+				</li>
+				{{/each}}
+			</ul>
+			{{else}}
+				<p>No countries present in the Worldbank database!</p>
+			{{/if}}
+		</script>
+		<script id="country-details-template" type="text/x-handlebars-template">
+			{{#if this}}
+				{{#if this.info}}
+				<h1 class="country-details-title grid__column-bp1-12">{{this.info.name}}</h1>
+				<img class="country__flag grid__column-bp1-6" src="http://www.geonames.org/flags/x/{{toLowerCase this.info.iso2Code}}.gif" />
+				<section class="country__info grid__column-bp1-6">
+						<span class="place__region">{{this.info.region.value}}</span>
+						<span class="place__city" data-lat="{{this.info.latitude}}" data-lng="{{this.info.longitude}}">{{this.info.capitalCity}}</span>
+						<span class="money__income-level" data-income-id="{{this.info.incomeLevel.id}}">{{this.info.incomeLevel.value}}</span>
+						<span class="money__lending-type" data-lending-id="{{this.info.lendingType.id}}">{{this.info.lendingType.value}}</span>
+				</section>
+				{{/if}}
+				{{#if this.forrestArea}}
+					<div class="grid__column-bp1-12">
+						<section class="country-details-forrestarea">
+							<h3>Forrest Area</h3>
+							<section class="ct-chart ct-minor-seventh country-details-forrestarea-chart">
+							</section>
+						</section>
+					</div>
+				{{/if}}
+				{{#if this.cellularSubscriptions}}
+					<div class="grid__column-bp1-12">
+						<section class="country-details-cellularsubscriptions">
+							<h3>Mobile cellular subscriptions</h3>
+							<section class="ct-chart ct-minor-seventh country-details-cellularsubscriptions-chart">
+							</section>
+						</section>
+					</div>
+				{{/if}}
+			{{else}}
+				<p>No country present in the Worldbank database with the selected ISO2Code!</p>
+			{{/if}}
+		</script><!-- End Handlebars Templates -->
+			
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.3/handlebars.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.min.js"></script>
+		<script src="js/vendor/signals.js"></script>	
+		<script src="js/vendor/hasher.js"></script>
+		<script src="js/vendor/crossroads.js"></script>	
+		<script src="js/helpers.js"></script>	
+		<script src="js/utilities.js"></script>	
+		<script src="js/jaywalker.js"></script>	
+		<script src="http://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>	
+		<script src="js/main.js"></script>
+	</body>
+</html>
