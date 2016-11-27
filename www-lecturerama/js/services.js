@@ -4,7 +4,6 @@ ApplicationDbContext
 1) Database transactions to the database --> localstorage
 2) Cache
 */
-
 var ApplicationDbContext = {
     "init": function(strConnection) {
         this._strConnection = strConnection; // Connection string to the key in the localstorage
@@ -16,6 +15,7 @@ var ApplicationDbContext = {
                 "modified": "2016-11-17",
                 "author": "AHS - GDM - MMP"
             },
+            "activeuser": null,
             "lecturers": [],
             "tinderizedlecturers": [],
             "timetable": [],
@@ -63,6 +63,18 @@ var ApplicationDbContext = {
             return null;
         }
         return this._dbData.lecturers[index];
+    },
+    "getLecturerByUserName": function(userName) {
+        // Find the index of the lecturer by id
+        var lecturers = this.getLecturers();
+        if(lecturers == null) {
+            return null;
+        }
+        return _.find(lecturers, function(lecturer) { return lecturer.UserName == userName; });
+    },
+    "setActiveUser": function(user) {
+        this._dbData.activeuser = user;
+        this.save();
     },
     "addLecturer": function(lecturer) {
         // Add a new lecturer (CREATE -> DB INSERT)
@@ -170,3 +182,30 @@ var ApplicationDbContext = {
         return i;
     }
 };
+
+/*
+UserManager
+--------------------
+1) Login, logout a User
+2) Cache
+*/
+var UserManager = {
+    "init": function(applicationDbContext) {
+        this._applicationDbContext = applicationDbContext;
+    },
+    "login": function(userName, passWord) {
+        var lecturer = this._applicationDbContext.getLecturerByUserName(userName);
+        if(lecturer == null) {
+            return null;
+        }
+        if(lecturer.PassWord != passWord) {
+            return false;
+        }
+        this._applicationDbContext.setActiveUser(lecturer);
+        return lecturer;
+    },
+    "logout": function() {
+        this._applicationDbContext.setActiveUser(null);
+        return true;
+    }
+}

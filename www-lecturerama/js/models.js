@@ -8,6 +8,8 @@ function Lecturer() {
     this.DayOfBirth;
     this.Gender;
 
+    this.UserName;
+    this.PassWord;
     this.Email;
 
     this.CreatedAt;
